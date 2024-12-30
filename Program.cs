@@ -10,26 +10,55 @@ namespace LibraryManagement
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Welcome to the Library!");
             Library library = new Library();
+            Book book = null;
+            char c;
+            do
+            {
+                Console.WriteLine("Enter the choice\n1.Add Books\n2.Borrow Book\n3.Return Book\n4.Display Books\n5.Exit!");
+                int choice = int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine("Enter Title (Drama/Adventure/Romance): ");
+                        string title = Console.ReadLine();
+                        Console.WriteLine("Enter Author: ");
+                        string auth = Console.ReadLine();
+                        Console.WriteLine("Enter ISBN (International Standard Book Number): ");
+                        string isbn = Console.ReadLine();
 
-            Book book1 = new Book { Title = "Drama", author = "xyz", ISBN = "156ab" };
-            library.AddBook(book1);
-            library.AddBook(new Book { Title = "Adventure", author = "abc", ISBN = "15kn" });
-            library.AddBook(new Book { Title = "Romance", author = "ikl", ISBN = "45ko" });
+                        book = new Book { Title = title, author = auth, ISBN = isbn };
+                        library.AddBook(book);
+                        break;
 
-            Console.WriteLine("\nDisplaying Library Books");
-            library.DisplayBooks();
+                    case 2:
+                        Console.WriteLine("\nBorrow 'Drama' :");
+                        book.Borrow();
+                        break;
 
-            Console.WriteLine("\nBorrow 'Drama' :");
-            book1.Borrow();
-            Console.WriteLine("\nBorrow 'Drama' Again:");
-            book1.Borrow();
-            Console.WriteLine("\nReturning 'Drama' :");
-            book1.Return();
+                    case 3:
+                        Console.WriteLine("\nReturning 'Drama' :");
+                        book.Return();
+                        break;
 
-            Console.WriteLine("\nDisplaying Library Books Again");
-            library.DisplayBooks();
+                    case 4:
+                        Console.WriteLine("\nDisplaying Library Books Again");
+                        library.DisplayBooks();
+                        break;
+                    case 5:
+                        Console.WriteLine("Exited!");
+                        return;
+                    default:
+                        Console.WriteLine("Enter valid choice:");
+                        break;
+                }
+                Console.WriteLine("Enter Y/y to start again or other key to exit!");
+                c = char.Parse(Console.ReadLine());
+            } while (c == 'Y' || c == 'y');
+            Console.WriteLine("Thank you!");
+            
         }
     }
 }
